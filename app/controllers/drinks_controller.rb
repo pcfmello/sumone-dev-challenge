@@ -1,4 +1,5 @@
 class DrinksController < ApplicationController
+
   def index
     @drinks = Drink.all.order(:created_at)
     @base_ingredient_list = Drink.distinct.pluck(:base_ingredient)
@@ -11,18 +12,17 @@ class DrinksController < ApplicationController
     if !params[:base_ingredient].blank?
       query[:base_ingredient] = params[:base_ingredient]
     end
-
     if !params[:origin].blank?
       query[:origin] = params[:origin]
     end
-
     if !params[:drinkware].blank?
       query[:drinkware] = params[:drinkware]
     end
 
-    puts query
-    
-    @drinks = Drink.where(query)
-    render json: @drinks
+    @drinks_found = Drink.where(query)
+
+    respond_to do |format|
+      format.js
+    end
   end
 end
