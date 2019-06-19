@@ -1,7 +1,7 @@
 class DrinksController < ApplicationController
 
   def index
-    @drinks = Drink.all.order(:created_at)
+    @drinks = Drink.all.order(:created_at).paginate(page: params[:page], per_page: 10)
     @base_ingredient_list = Drink.distinct.pluck(:base_ingredient)
     @origin_list = Drink.distinct.pluck(:origin)
     @drinkware_list = Drink.distinct.pluck(:drinkware)
