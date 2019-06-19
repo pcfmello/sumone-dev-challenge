@@ -1,0 +1,20 @@
+var listItem = (`
+    <% if !@drinks_found.empty? %>
+        <% @drinks_found.each do |drink| %>
+            <div class="card drink-card">
+                <%= image_tag drink.image_url, class: 'drink-card__img' %>
+                <div class="drink-card__body">
+                    <h2><%= drink.name %></h2>
+                    <p><%= drink.description %></p>
+                </div>
+            </div>
+        <% end %>
+    <% end %>
+    <% if @drinks_found.empty? %>        
+        <h2>Sem recomendações</h2>            
+    <% end %>
+`);
+
+console.log(listItem);
+
+$('.drinks-list').html(listItem);
