@@ -1,3 +1,4 @@
+
 <div>
   <div class="header gradient">
     <%= image_tag 'cocktail-white.svg', class: 'icon' %>
@@ -16,7 +17,7 @@
       </div>
     </div>
 
-    <%= form_tag do %>
+    <%= form_tag("/", method: "post", remote: true ) do %>
       <div class="simple-form">
         <div class="simple-form__input">
           <input class="form-control form-control-lg" type="text" placeholder="Try a Martini..">
@@ -28,6 +29,28 @@
 
       <div class="advanced-form" style="display:none;">
         User inputs to search a collection of drinks based on given recommendations.
+        <div id="form-to-recomendation" style="margin-top: 16px">
+
+          <div style="display: flex; flex-direction: column; margin-bottom: 16px;">
+            <label for="base_ingredient">Base ingredient</label>
+            <%= select("", "base_ingredient", @base_ingredient_list, { include_blank: true }) %>
+          </div>
+
+          <div style="display: flex; flex-direction: column; margin-bottom: 16px;">
+            <label for="origin">Origin</label>
+            <%= select("", "origin", @origin_list, { include_blank: true }) %>
+          </div>
+
+          <div style="display: flex; flex-direction: column; margin-bottom: 16px;">
+            <label for="drinkware">Drinkware</label>
+            <%= select("", "drinkware", @drinkware_list, { include_blank: true }) %>
+          </div>
+
+          <div>
+            <%= submit_tag("Recommend up!") %>
+          </div>
+
+        </div>
       </div>
     <% end %>
   </div>
