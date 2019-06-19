@@ -55,7 +55,7 @@
     <% end %>
   </div>
 
-  <div class="drinks-list">
+  <div class="drinks-list simple-form">
     <% @drinks.each do |drink| %>
       <div class="card drink-card">
         <%= image_tag drink.image_url, class: 'drink-card__img' %>
@@ -66,4 +66,20 @@
       </div>
     <% end %>
   </div>
+
+  <div class="drinks-list recommend advanced-form">
+    <% if @drinks_found != nil && !@drinks_found.empty %>
+      <% @drinks_found.each do |drink| %>
+        <div class="card drink-card">
+          <%= image_tag drink.image_url, class: 'drink-card__img' %>
+          <div class="drink-card__body">
+            <h2><%= drink.name %></h2>
+            <p><%= drink.description %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  
 </div>
