@@ -4,78 +4,54 @@
     <%= image_tag 'cocktail-white.svg', class: 'icon' %>
     <div class="header__title">The drinks searcher</div>
   </div>
-
-  <div class="searcher">
-    <div class="searcher__radio">
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="searchRadio" id="simpleSearch" value="simple" checked>
-        <label class="form-check-label" for="simpleSearch">Easy search</label>
+  <div class="container">
+    <div class="searcher">
+      <div class="searcher__radio">
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="searchRadio" id="simpleSearch" value="simple" checked>
+          <label class="form-check-label" for="simpleSearch">Easy search</label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="searchRadio" id="advancedSearch" value="advanced">
+          <label class="form-check-label" for="advancedSearch">Recommend me ;)</label>
+        </div>
       </div>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="searchRadio" id="advancedSearch" value="advanced">
-        <label class="form-check-label" for="advancedSearch">Recommend me ;)</label>
-      </div>
+      <%= form_tag("/search", method: "get", remote: true, class: "form-search" ) do %>
+        <div class="simple-form">
+          <div class="simple-form__input form-group">
+            <input class="form-control form-control-lg" type="text" name="drink_name" placeholder="Try a Martini..">
+          </div>
+          <div class="simple-form__btn">
+            <button type="submit" class="btn btn-outline-primary btn-lg">Search</button>
+          </div>
+        </div>
+      <% end %>
+      <%= form_tag("/recommend", method: "get", remote: true ) do %>      
+        <div class="advanced-form" style="display:none;">
+          <div id="form-to-recomendation" style="margin-top: 16px">
+            <div class="row">
+              <div class="col-md-4 form-group">
+                <label for="base_ingredient">Base ingredient</label>
+                <%= select("", "base_ingredient", @base_ingredient_list, { include_blank: "-- SELECT-- " }, {:class => "form-control form-control-lg"}) %>
+              </div>
+              <div class="col-md-4  form-group">
+                <label for="origin">Origin</label>
+                <%= select("", "origin", @origin_list, { include_blank: "-- SELECT --" }, {:class => "form-control form-control-lg"}) %>
+              </div>
+              <div class="col-md-4  form-group">
+                <label for="drinkware">Drinkware</label>
+                <%= select("", "drinkware", @drinkware_list, { include_blank: "-- SELECT --" }, {:class => "form-control form-control-lg"}) %>
+              </div>
+            </div>
+            <div class="advanced-form__btn">
+              <button type="submit" class="btn btn-outline-primary btn-lg">Recommend up</button>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
-
-    <%= form_tag("/search", method: "get", remote: true, class: "form-search" ) do %>
-      <div class="simple-form">
-        <div class="simple-form__input">
-          <input class="form-control form-control-lg" type="text" name="drink_name" placeholder="Try a Martini..">
-        </div>
-        <div class="simple-form__btn">
-          <button type="submit" class="btn btn-outline-primary btn-lg">Search</button>
-        </div>
-      </div>
-    <% end %>
-
-    <%= form_tag("/recommend", method: "get", remote: true ) do %>      
-
-      <div class="advanced-form" style="display:none;">
-        <div id="form-to-recomendation" style="margin-top: 16px">
-
-          <div class="row">
-            <div class="col-md-4 form-group">
-              <label for="base_ingredient">Base ingredient</label>
-              <%= select("", "base_ingredient", @base_ingredient_list, { include_blank: "SELECT" }, {:class => "form-control form-control-lg"}) %>
-            </div>
-
-            <div class="col-md-4  form-group">
-              <label for="origin">Origin</label>
-              <%= select("", "origin", @origin_list, { include_blank: "SELECT" }, {:class => "form-control form-control-lg"}) %>
-            </div>
-
-            <div class="col-md-4  form-group">
-              <label for="drinkware">Drinkware</label>
-              <%= select("", "drinkware", @drinkware_list, { include_blank: "SELECT" }, {:class => "form-control form-control-lg"}) %>
-            </div>
-          </div>
-          <div class="advanced-form__btn">
-            <button type="submit" class="btn btn-outline-primary btn-lg">Recommend up</button>
-          </div>
-
-        </div>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="drinks-list simple simple-form"> 
-    <% @drinks.each do |drink| %>
-      <div class="card drink-card">
-        <%= image_tag drink.image_url, class: 'drink-card__img' %>
-        <div class="drink-card__body">
-          <h2><%= drink.name %></h2>
-          <p><%= drink.description %></p>
-        </div>
-      </div>
-    <% end %>
-  </div>
-  <div class="pagination-section simple-form">
-    <%= will_paginate @drinks, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
-  </div>
-
-  <div class="drinks-list recommend advanced-form">
-    <% if @drinks_found != nil && !@drinks_found.empty %>
-      <% @drinks_found.each do |drink| %>
+    <div class="drinks-list simple simple-form"> 
+      <% @drinks.each do |drink| %>
         <div class="card drink-card">
           <%= image_tag drink.image_url, class: 'drink-card__img' %>
           <div class="drink-card__body">
@@ -84,6 +60,22 @@
           </div>
         </div>
       <% end %>
-    <% end %>
+    </div>
+    <div class="pagination-section simple-form">
+      <%= will_paginate @drinks, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+    </div>
+    <div class="drinks-list recommend advanced-form">
+      <% if @drinks_found != nil && !@drinks_found.empty %>
+        <% @drinks_found.each do |drink| %>
+          <div class="card drink-card">
+            <%= image_tag drink.image_url, class: 'drink-card__img' %>
+            <div class="drink-card__body">
+              <h2><%= drink.name %></h2>
+              <p><%= drink.description %></p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
