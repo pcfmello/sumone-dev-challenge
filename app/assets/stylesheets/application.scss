@@ -89,12 +89,11 @@
           flex-direction: column;
 
           select {
-            option {
-              text-transform: capitalize;
-              &:checked {
-                background-color: grey;
-                color: white;
-              }
+            text-transform: capitalize;
+
+            option:checked {
+              background-color: grey;
+              color: white;
             }
           }
 
