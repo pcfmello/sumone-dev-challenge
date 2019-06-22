@@ -1,6 +1,6 @@
 var listItem = (`
-    <% if !@drinks_found.empty? %>
-        <% @drinks_found.each do |drink| %>
+    <% if !@drinks.empty? %>
+        <% @drinks.each do |drink| %>
             <div class="card drink-card">
                 <%= image_tag drink.image_url, class: 'drink-card__img' %>
                 <div class="drink-card__body">
@@ -10,9 +10,9 @@ var listItem = (`
             </div>
         <% end %>
     <% end %>
-    <% if @drinks_found.empty? %>        
-        <h2>There's not recomendation! 
+    <% if @drinks.empty? %>        
+        <h2>Drink is not found!</h2>            
     <% end %>
 `);
 
-$('.drinks-list.recommend').html(listItem);
+$('.drinks-list.simple').html(listItem);
