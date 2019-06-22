@@ -59,3 +59,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Pagination
 gem 'will_paginate', '>= 3.1'
+gem 'will_paginate-bootstrap4'

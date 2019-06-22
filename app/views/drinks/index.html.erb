@@ -17,37 +17,40 @@
       </div>
     </div>
 
-    <%= form_tag("/", method: "post", remote: true ) do %>
+    <%= form_tag("/search", method: "get", remote: true, class: "form-search" ) do %>
       <div class="simple-form">
         <div class="simple-form__input">
-          <input class="form-control form-control-lg" type="text" placeholder="Try a Martini..">
+          <input class="form-control form-control-lg" type="text" name="drink_name" placeholder="Try a Martini..">
         </div>
         <div class="simple-form__btn">
           <button type="submit" class="btn btn-outline-primary btn-lg">Search</button>
         </div>
       </div>
+    <% end %>
+
+    <%= form_tag("/recommend", method: "get", remote: true ) do %>      
 
       <div class="advanced-form" style="display:none;">
-        User inputs to search a collection of drinks based on given recommendations.
         <div id="form-to-recomendation" style="margin-top: 16px">
 
-          <div style="display: flex; flex-direction: column; margin-bottom: 16px;">
-            <label for="base_ingredient">Base ingredient</label>
-            <%= select("", "base_ingredient", @base_ingredient_list, { include_blank: true }) %>
-          </div>
+          <div class="row">
+            <div class="col-md-4 form-group">
+              <label for="base_ingredient">Base ingredient</label>
+              <%= select("", "base_ingredient", @base_ingredient_list, { include_blank: "SELECT" }, {:class => "form-control form-control-lg"}) %>
+            </div>
 
-          <div style="display: flex; flex-direction: column; margin-bottom: 16px;">
-            <label for="origin">Origin</label>
-            <%= select("", "origin", @origin_list, { include_blank: true }) %>
-          </div>
+            <div class="col-md-4  form-group">
+              <label for="origin">Origin</label>
+              <%= select("", "origin", @origin_list, { include_blank: "SELECT" }, {:class => "form-control form-control-lg"}) %>
+            </div>
 
-          <div style="display: flex; flex-direction: column; margin-bottom: 16px;">
-            <label for="drinkware">Drinkware</label>
-            <%= select("", "drinkware", @drinkware_list, { include_blank: true }) %>
+            <div class="col-md-4  form-group">
+              <label for="drinkware">Drinkware</label>
+              <%= select("", "drinkware", @drinkware_list, { include_blank: "SELECT" }, {:class => "form-control form-control-lg"}) %>
+            </div>
           </div>
-
-          <div>
-            <%= submit_tag("Recommend up!") %>
+          <div class="advanced-form__btn">
+            <button type="submit" class="btn btn-outline-primary btn-lg">Recommend up</button>
           </div>
 
         </div>
@@ -55,8 +58,7 @@
     <% end %>
   </div>
 
-  <div class="drinks-list simple-form">
-    <%= will_paginate @drinks %>
+  <div class="drinks-list simple simple-form"> 
     <% @drinks.each do |drink| %>
       <div class="card drink-card">
         <%= image_tag drink.image_url, class: 'drink-card__img' %>
@@ -66,6 +68,9 @@
         </div>
       </div>
     <% end %>
+  </div>
+  <div class="pagination-section simple-form">
+    <%= will_paginate @drinks, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
   </div>
 
   <div class="drinks-list recommend advanced-form">

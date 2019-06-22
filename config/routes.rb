@@ -3,7 +3,8 @@ Rails.application.routes.draw do
 
   root to: 'drinks#index'
 
-  post '/', to: 'drinks#recommend'
+  get '/search', to: 'drinks#search'
+  get '/recommend', to: 'drinks#recommend'
 
   resources :home, only: %i[index]
 end
