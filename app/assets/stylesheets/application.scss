@@ -24,108 +24,115 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   height: 360px;
+
+  &.gradient {
+    background: #e96443;
+    background: -webkit-linear-gradient(to right, #904e95, #e96443);
+    background: linear-gradient(to right, #904e95, #e96443);
+
+    .header__title {
+      font-family: "Buffalo Regular";
+      font-size: 100px;
+      color: #fff;
+    }
+
+    .icon {
+      width: 160px;
+      height: 160px;
+    }
+  }
 }
 
-.header__title {
-  font-family: "Buffalo Regular";
-  font-size: 100px;
-  color: #fff;
-}
+.container {
+  .searcher {
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 32px;
 
-.gradient {
-  background: #e96443;
-  background: -webkit-linear-gradient(to right, #904e95, #e96443);
-  background: linear-gradient(to right, #904e95, #e96443);
-}
+    .searcher__radio {
+      display: flex;
+      justify-content: space-between;
 
-.icon {
-  width: 160px;
-  height: 160px;
-}
+      width: 320px;
+    }
 
-.searcher {
-  display: flex;
-  width: 820px;
-  margin: 0 auto;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 32px;
-}
+    form {
+      width: 100%;
 
-.searcher__radio {
-  display: flex;
-  justify-content: space-between;
+      &.form-search {
+        display: flex;
+        justify-content: center;
 
-  width: 320px;
-}
+        .simple-form {
+          margin-top: 20px;
+          display: flex;
+          width: 100%;
 
-form {
-  width: 100%;
-}
+          .simple-form__input {
+            width: 100%;
+          }
 
-.form-search {
-  display: flex;
-  justify-content: center;
-}
+          .simple-form__btn {
+            margin-left: 10px;
+          }
+        }
+      }
 
-.simple-form {
-  margin-top: 20px;
-  display: flex;
-  width: 100%;
-}
+      .advanced-form {
+        margin-top: 20px;
 
-.simple-form__input {
-  width: 100%;
-}
+        #form-to-recomendation {
+          display: flex;
+          flex-direction: column;
 
-.simple-form__btn {
-  margin-left: 10px;
-}
+          select {
+            option {
+              text-transform: capitalize;
+              &:checked {
+                background-color: grey;
+                color: white;
+              }
+            }
+          }
 
-.advanced-form {
-  margin-top: 20px;
-}
+          .advanced-form__btn {
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
 
-.advanced-form__btn {
-  display: flex;
-  justify-content: center;
-}
+  .drinks-list {
+    margin: 0 auto;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-.drinks-list {
-  margin: 0 auto;
-  margin-top: 40px;
-  width: 820px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+    .drink-card {
+      margin-bottom: 20px;
+      padding: 20px;
+      display: flex;
+      flex-direction: row;
 
-.drink-card {
-  margin-bottom: 20px;
-  padding: 20px;
-  display: flex;
-  flex-direction: row;
-}
+      .drink-card__img {
+        width: 220px;
+        height: 220px;
+        border-radius: 0.25em;
+      }
 
-.drink-card__img {
-  width: 220px;
-  height: 220px;
+      .drink-card__body {
+        margin-left: 30px;
+      }
+    }
+  }
 
-  border-radius: 0.25em;
-}
-
-.drink-card__body {
-  margin-left: 30px;
-}
-
-#form-to-recomendation {
-  display: flex;
-  flex-direction: column;
-}
-
-.pagination-section {
-  display: flex;
-  justify-content: center;
+  .pagination-section {
+    display: flex;
+    justify-content: center;
+  }
 }
