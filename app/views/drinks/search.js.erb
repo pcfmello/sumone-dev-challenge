@@ -1,2 +1,2 @@
 $('.drinks-list.simple').html("<%= escape_javascript(render partial: 'drinks_list', locals: { drinks: @drinks, is_search: true } ) %>");
-$('.pagination > a').attr("data-remote", "true");
+<%# $('.pagination > a').attr("data-remote", "true"); %>
