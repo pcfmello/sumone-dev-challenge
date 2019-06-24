@@ -1,7 +1,9 @@
 class DrinksController < ApplicationController
 
+  TOTAL_PER_PAGE = 10
+
   def index
-    @drinks = Drink.all.order(:created_at).paginate(page: params[:page], per_page: 10)
+    @drinks = Drink.all.order(:created_at).paginate(page: params[:page], per_page: TOTAL_PER_PAGE)
     @base_ingredient_list = Drink.distinct.pluck(:base_ingredient)
     @origin_list = Drink.distinct.pluck(:origin)
     @drinkware_list = Drink.distinct.pluck(:drinkware)
@@ -14,9 +16,10 @@ class DrinksController < ApplicationController
   def search
     drink_name = params[:drink_name] || ""
     if drink_name.nil? || drink_name.blank?
-      @drinks = Drink.all.order(:created_at).paginate(page: params[:page], per_page: 10)
+      @drinks = Drink.all.order(:created_at).paginate(page: params[:page], per_page: TOTAL_PER_PAGE )
     else 
-      @drinks = Drink.where("lower(name) LIKE :query", query: "%#{drink_name.downcase}%").order(:name).paginate(page: params[:page], per_page: 10)
+      @drinks = Drink.where("lower(name) LIKE :query", query: "%#{drink_name.downcase}%")
+          .order(:name).paginate(page: params[:page], per_page: TOTAL_PER_PAGE)
     end
     respond_to do |format|
       format.js
