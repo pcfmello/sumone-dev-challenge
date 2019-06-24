@@ -1,18 +1,2 @@
-var listItem = (`
-    <% if !@drinks.empty? %>
-        <% @drinks.each do |drink| %>
-            <div class="card drink-card">
-                <%= image_tag drink.image_url, class: 'drink-card__img' %>
-                <div class="drink-card__body">
-                    <h2><%= drink.name %></h2>
-                    <p><%= drink.description %></p>
-                </div>
-            </div>
-        <% end %>
-    <% end %>
-    <% if @drinks.empty? %>        
-        <h2>Drink is not found!</h2>            
-    <% end %>
-`);
-
-$('.drinks-list.simple').html(listItem);
+$('.drinks-list.simple').html("<%= escape_javascript(render partial: 'drinks_list', locals: { drinks: @drinks, is_search: true } ) %>");
+$('.pagination > a').attr("data-remote", "true");

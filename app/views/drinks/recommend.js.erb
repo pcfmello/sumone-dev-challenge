@@ -1,18 +1,1 @@
-var listItem = (`
-    <% if !@drinks_found.empty? %>
-        <% @drinks_found.each do |drink| %>
-            <div class="card drink-card">
-                <%= image_tag drink.image_url, class: 'drink-card__img' %>
-                <div class="drink-card__body">
-                    <h2><%= drink.name %></h2>
-                    <p><%= drink.description %></p>
-                </div>
-            </div>
-        <% end %>
-    <% end %>
-    <% if @drinks_found.empty? %>        
-        <h2>There's not recomendation! 
-    <% end %>
-`);
-
-$('.drinks-list.recommend').html(listItem);
+$('.drinks-list.recommend').html("<%= escape_javascript(render partial: 'drinks_list', locals: { drinks: @drinks } ) %>");

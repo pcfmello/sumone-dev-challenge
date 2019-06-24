@@ -35,7 +35,7 @@ class DrinksController < ApplicationController
       query[:drinkware] = params[:drinkware]
     end
 
-    @drinks_found = Drink.where(query)
+    @drinks = Drink.where(query)
 
     respond_to do |format|
       format.js

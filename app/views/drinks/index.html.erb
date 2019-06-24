@@ -49,33 +49,10 @@
           </div>
         </div>
       <% end %>
-    </div>
-    <div class="drinks-list simple simple-form"> 
-      <% @drinks.each do |drink| %>
-        <div class="card drink-card">
-          <%= image_tag drink.image_url, class: 'drink-card__img' %>
-          <div class="drink-card__body">
-            <h2><%= drink.name %></h2>
-            <p><%= drink.description %></p>
-          </div>
-        </div>
-      <% end %>
-    </div>
-    <div class="pagination-section simple-form">
-      <%= will_paginate @drinks, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
-    </div>
-    <div class="drinks-list recommend advanced-form">
-      <% if @drinks_found != nil && !@drinks_found.empty %>
-        <% @drinks_found.each do |drink| %>
-          <div class="card drink-card">
-            <%= image_tag drink.image_url, class: 'drink-card__img' %>
-            <div class="drink-card__body">
-              <h2><%= drink.name %></h2>
-              <p><%= drink.description %></p>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
+    </div>    
+    <div class="lists">
+      <div class="drinks-list simple simple-form"></div>       
+      <div class="drinks-list recommend advanced-form"></div>      
     </div>
   </div>
 </div>

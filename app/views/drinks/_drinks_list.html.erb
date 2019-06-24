@@ -1,0 +1,23 @@
+<% if !drinks.empty? %>
+    <% drinks.each do |drink| %>
+        <div class="card drink-card">
+            <%= image_tag drink.image_url, class: 'drink-card__img' %>
+            <div class="drink-card__body">
+                <h2><%= drink.name %></h2>
+                <p><%= drink.description %></p>
+            </div>
+        </div>
+    <% end %>
+    <% if defined? is_search %>
+        <%= will_paginate drinks, remote: true, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
+    <% end %>
+<% end %>
+<% if drinks.empty? %>        
+    <h2>
+        <% if defined? is_search %>
+            Drink not found!
+        <% else %>
+            Recomendations not found!
+        <% end %>
+    </h2>            
+<% end %>
