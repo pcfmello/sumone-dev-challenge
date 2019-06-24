@@ -16,7 +16,7 @@ class DrinksController < ApplicationController
     if drink_name.nil? || drink_name.blank?
       @drinks = Drink.all.order(:created_at).paginate(page: params[:page], per_page: 10)
     else 
-      @drinks = Drink.where("name LIKE :query", query: "%#{drink_name}%").order(:name).paginate(page: params[:page], per_page: 10)
+      @drinks = Drink.where("lower(name) LIKE :query", query: "%#{drink_name.downcase}%").order(:name).paginate(page: params[:page], per_page: 10)
     end
     respond_to do |format|
       format.js
